@@ -30,7 +30,6 @@
     cursor: default;
   }
 
-  /* ── HERO BG ── */
   .hero-bg {
     position: fixed;
     inset: 0;
@@ -58,7 +57,6 @@
     100% { transform: translateY(60px); }
   }
 
-  /* Circuit lines */
   .circuits {
     position: absolute;
     inset: 0;
@@ -67,7 +65,6 @@
   }
   .circuits svg { width: 100%; height: 100%; }
 
-  /* ── NAV ── */
   nav {
     position: relative;
     z-index: 100;
@@ -87,8 +84,8 @@
   }
 
   .logo-ring {
-    width: 80px;
-    height: 80px;
+    width: 90px;
+    height: 90px;
     border-radius: 50%;
     border: 2px solid rgba(0,229,255,0.4);
     display: flex;
@@ -97,17 +94,19 @@
     background: radial-gradient(circle, rgba(0,229,255,0.1) 0%, transparent 70%);
     box-shadow: 0 0 30px rgba(0,229,255,0.3), inset 0 0 20px rgba(0,229,255,0.05);
     animation: logoPulse 3s ease-in-out infinite;
-    position: relative;
+    overflow: hidden;
+  }
+
+  .logo-ring img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
   }
 
   @keyframes logoPulse {
     0%, 100% { box-shadow: 0 0 30px rgba(0,229,255,0.3), inset 0 0 20px rgba(0,229,255,0.05); }
     50% { box-shadow: 0 0 60px rgba(0,229,255,0.5), inset 0 0 30px rgba(0,229,255,0.1); }
-  }
-
-  .logo-dragon {
-    font-size: 36px;
-    filter: drop-shadow(0 0 10px var(--cyan));
   }
 
   .logo-text {
@@ -155,7 +154,6 @@
     background: linear-gradient(135deg, #33eeff, #00e5ff) !important;
   }
 
-  /* ── HERO ── */
   .hero {
     position: relative;
     z-index: 10;
@@ -215,7 +213,6 @@
     box-shadow: 0 0 30px rgba(0,229,255,0.3);
   }
 
-  /* ── MARKET CARD ── */
   .market-section {
     position: relative;
     z-index: 10;
@@ -261,7 +258,6 @@
     font-family: 'Share Tech Mono', monospace;
   }
 
-  /* Fake chart */
   .fake-chart {
     position: absolute;
     bottom: 20px;
@@ -315,7 +311,6 @@
   .stat-value.red { color: #ff4d6a; }
   .stat-value.green { color: var(--green); }
 
-  /* ── BOTTOM GRID ── */
   .bottom-grid {
     position: relative;
     z-index: 10;
@@ -357,7 +352,6 @@
     margin-bottom: 16px;
   }
 
-  /* Tokenomics donut */
   .donut-wrap {
     display: flex;
     gap: 14px;
@@ -382,7 +376,6 @@
   }
   .legend-pct { margin-left: auto; color: var(--text); font-family: 'Share Tech Mono', monospace; font-size: 10px; }
 
-  /* Roadmap timeline */
   .timeline {
     position: relative;
     padding-top: 10px;
@@ -440,7 +433,6 @@
     line-height: 1.3;
   }
 
-  /* Community */
   .social-list { list-style: none; }
   .social-item {
     display: flex;
@@ -455,6 +447,7 @@
     transition: all 0.3s;
     border: 1px solid transparent;
     margin-bottom: 6px;
+    text-decoration: none;
   }
   .social-item:hover {
     background: rgba(0,229,255,0.08);
@@ -469,11 +462,10 @@
     flex-shrink: 0;
   }
   .si-fb { background: #1877f2; }
-  .si-ig { background: linear-gradient(135deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); }
-  .si-disc { background: #5865f2; }
-  .si-yt { background: #ff0000; }
+  .si-tg { background: #229ed9; }
+  .si-dex { background: #1a1a2e; border: 1px solid rgba(0,229,255,0.3); }
+  .si-gem { background: #0d1f2d; border: 1px solid rgba(0,229,255,0.3); }
 
-  /* ── GLOW ORBS ── */
   .orb {
     position: fixed;
     border-radius: 50%;
@@ -499,7 +491,6 @@
     50% { transform: translateY(-30px) scale(1.05); }
   }
 
-  /* Ticker */
   .ticker {
     position: relative;
     z-index: 10;
@@ -539,11 +530,9 @@
 </head>
 <body>
 
-<!-- Background -->
 <div class="hero-bg">
   <div class="circuits">
     <svg viewBox="0 0 1400 900" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
-      <!-- Circuit traces -->
       <g stroke="#00e5ff" stroke-width="0.8" fill="none" opacity="0.6">
         <polyline points="0,200 120,200 120,150 300,150 300,200 500,200"/>
         <polyline points="500,200 500,280 700,280 700,200 900,200"/>
@@ -553,7 +542,6 @@
         <polyline points="800,450 800,380 1000,380 1000,450 1400,450"/>
         <polyline points="0,650 150,650 150,600 350,600 350,700 600,700"/>
         <polyline points="600,700 600,620 850,620 850,700 1200,700 1200,650 1400,650"/>
-        <!-- Vertical traces -->
         <polyline points="120,200 120,400"/>
         <polyline points="300,150 300,50"/>
         <polyline points="500,280 500,450"/>
@@ -567,7 +555,6 @@
         <polyline points="850,620 850,450"/>
         <polyline points="1200,650 1200,500"/>
       </g>
-      <!-- Circuit nodes -->
       <g fill="#00e5ff" opacity="0.5">
         <circle cx="120" cy="200" r="3"/>
         <circle cx="300" cy="150" r="3"/>
@@ -581,14 +568,12 @@
         <circle cx="350" cy="600" r="3"/>
         <circle cx="850" cy="620" r="3"/>
         <circle cx="1200" cy="650" r="3"/>
-        <!-- Square pads -->
         <rect x="297" y="147" width="6" height="6" rx="1"/>
         <rect x="697" y="277" width="6" height="6" rx="1"/>
         <rect x="1097" y="117" width="6" height="6" rx="1"/>
         <rect x="597" y="377" width="6" height="6" rx="1"/>
         <rect x="847" y="617" width="6" height="6" rx="1"/>
       </g>
-      <!-- Microchips -->
       <g stroke="#00e5ff" stroke-width="0.8" fill="rgba(0,229,255,0.04)" opacity="0.5">
         <rect x="650" y="60" width="100" height="80" rx="4"/>
         <text x="700" y="105" text-anchor="middle" fill="#00e5ff" font-size="8" font-family="monospace">FLC-01</text>
@@ -601,15 +586,13 @@
   </div>
 </div>
 
-<!-- Orbs -->
 <div class="orb orb1"></div>
 <div class="orb orb2"></div>
 
-<!-- Nav -->
 <nav>
   <div class="logo-wrap">
     <div class="logo-ring">
-      <span class="logo-dragon">🐉</span>
+      <img src="LOGO (2).png" alt="FALCOR TOKEN Logo" />
     </div>
     <div class="logo-text">
       <div class="main">FALCOR</div>
@@ -622,21 +605,19 @@
     <a href="#">Roadmap</a>
     <a href="#">Whitepaper</a>
     <a href="#">Community</a>
-    <a href="#" class="btn-buy">BUY FLC</a>
+    <a href="https://pancakeswap.finance/swap?outputCurrency=0x185643a3a9c36FA12DA777f6E86a25f509Fe512C" target="_blank" class="btn-buy">BUY FLC</a>
   </div>
 </nav>
 
-<!-- Ticker -->
 <div class="ticker">
   <div class="ticker-inner">
-    <div class="ticker-item"><span class="sym">FLC</span> $0.0002842 <span class="dn">▼ 11.79%</span></div>
+    <div class="ticker-item"><span class="sym">FLC</span> $0.0000000282874 <span class="dn">▼ 11.79%</span></div>
     <div class="ticker-item"><span class="sym">BTC</span> $97,420.00 <span class="up">▲ 2.31%</span></div>
     <div class="ticker-item"><span class="sym">ETH</span> $3,812.44 <span class="up">▲ 1.74%</span></div>
     <div class="ticker-item"><span class="sym">SOL</span> $182.50 <span class="dn">▼ 0.82%</span></div>
     <div class="ticker-item"><span class="sym">BNB</span> $624.80 <span class="up">▲ 0.55%</span></div>
     <div class="ticker-item"><span class="sym">VOL 24h</span> $46 <span class="sym">MCap</span> $2,942</div>
-    <!-- repeat for seamless loop -->
-    <div class="ticker-item"><span class="sym">FLC</span> $0.0002842 <span class="dn">▼ 11.79%</span></div>
+    <div class="ticker-item"><span class="sym">FLC</span> $0.0000000282874 <span class="dn">▼ 11.79%</span></div>
     <div class="ticker-item"><span class="sym">BTC</span> $97,420.00 <span class="up">▲ 2.31%</span></div>
     <div class="ticker-item"><span class="sym">ETH</span> $3,812.44 <span class="up">▲ 1.74%</span></div>
     <div class="ticker-item"><span class="sym">SOL</span> $182.50 <span class="dn">▼ 0.82%</span></div>
@@ -645,14 +626,12 @@
   </div>
 </div>
 
-<!-- Hero -->
 <div class="hero">
   <h1>FALCOR TOKEN:<br><span>POWER THE FUTURE</span><br>OF BLOCKCHAIN</h1>
   <p>A revolutionary token for an advanced digital ecosystem.</p>
-  <a href="#" class="btn-start">GET STARTED</a>
+  <a href="https://pancakeswap.finance/swap?outputCurrency=0x185643a3a9c36FA12DA777f6E86a25f509Fe512C" target="_blank" class="btn-start">GET STARTED</a>
 </div>
 
-<!-- Market Card -->
 <div class="market-section">
   <div class="market-card">
     <div class="chart-area">
@@ -666,15 +645,11 @@
               <stop offset="100%" stop-color="#00e5ff" stop-opacity="0"/>
             </linearGradient>
           </defs>
-          <!-- Area fill -->
           <path d="M0,60 L30,55 L60,50 L90,45 L120,52 L150,48 L180,42 L210,38 L240,44 L270,50 L300,46 L330,40 L360,36 L390,42 L420,38 L450,32 L480,28 L510,35 L540,30 L570,38 L600,45 L630,50 L660,55 L700,60 L700,100 L0,100 Z"
                 fill="url(#chartGrad)"/>
-          <!-- Line -->
           <polyline points="0,60 30,55 60,50 90,45 120,52 150,48 180,42 210,38 240,44 270,50 300,46 330,40 360,36 390,42 420,38 450,32 480,28 510,35 540,30 570,38 600,45 630,50 660,55 700,60"
                     stroke="#00e5ff" stroke-width="1.5" fill="none"/>
-          <!-- Candles hint (red zone) -->
           <rect x="480" y="24" width="120" height="14" fill="rgba(255,45,120,0.2)" rx="2"/>
-          <!-- Current price line -->
           <line x1="700" y1="60" x2="640" y2="60" stroke="#ff2d78" stroke-width="1" stroke-dasharray="3,2"/>
         </svg>
       </div>
@@ -682,7 +657,7 @@
     <div class="market-data">
       <div class="market-info">
         <h3>Market Data</h3>
-        <div class="price-main">$ 0.0002842</div>
+        <div class="price-main">$ 0.0000000282874</div>
       </div>
       <div class="market-stats">
         <div class="stat-row">
@@ -706,17 +681,14 @@
   </div>
 </div>
 
-<!-- Bottom 3 Panels -->
 <div class="bottom-grid">
 
-  <!-- Tokenomics -->
   <div class="panel">
     <h3>Tokenomics</h3>
     <div class="sub-label">Breakdown & Distribution</div>
     <div class="donut-wrap">
       <svg class="donut-svg" width="90" height="90" viewBox="0 0 90 90">
         <circle cx="45" cy="45" r="35" fill="none" stroke="#0a1e35" stroke-width="16"/>
-        <!-- segments approximated -->
         <circle cx="45" cy="45" r="35" fill="none" stroke="#00e5ff" stroke-width="16"
           stroke-dasharray="66 154" stroke-dashoffset="0" transform="rotate(-90 45 45)"/>
         <circle cx="45" cy="45" r="35" fill="none" stroke="#69ff47" stroke-width="16"
@@ -729,8 +701,6 @@
           stroke-dasharray="18 202" stroke-dashoffset="-162" transform="rotate(-90 45 45)"/>
         <circle cx="45" cy="45" r="35" fill="none" stroke="#5ce1e6" stroke-width="16"
           stroke-dasharray="36 184" stroke-dashoffset="-180" transform="rotate(-90 45 45)"/>
-        <circle cx="45" cy="45" r="35" fill="none" stroke="#4a4a6a" stroke-width="16"
-          stroke-dasharray="4 216" stroke-dashoffset="-216" transform="rotate(-90 45 45)"/>
         <circle cx="45" cy="45" r="22" fill="#080f1a"/>
       </svg>
       <div class="token-legend">
@@ -744,7 +714,6 @@
     </div>
   </div>
 
-  <!-- Roadmap -->
   <div class="panel">
     <h3>Roadmap</h3>
     <div class="sub-label">&nbsp;</div>
@@ -782,26 +751,33 @@
     </div>
   </div>
 
-  <!-- Community -->
   <div class="panel">
     <h3>Community</h3>
     <div class="sub-label">&nbsp;</div>
     <ul class="social-list">
-      <li class="social-item">
-        <div class="social-icon si-fb">📘</div>
-        Facebook
+      <li>
+        <a class="social-item" href="https://www.facebook.com/profile.php?id=100068807224630" target="_blank">
+          <div class="social-icon si-fb">📘</div>
+          Facebook
+        </a>
       </li>
-      <li class="social-item">
-        <div class="social-icon si-ig">📷</div>
-        Falcor
+      <li>
+        <a class="social-item" href="https://dexscreener.com/bsc/0x185643a3a9c36fa12da777f6e86a25f509fe512c" target="_blank">
+          <div class="social-icon si-dex">📊</div>
+          DexScreener
+        </a>
       </li>
-      <li class="social-item">
-        <div class="social-icon si-disc">💬</div>
-        Community
+      <li>
+        <a class="social-item" href="https://gemfinder.cc/gem/29342" target="_blank">
+          <div class="social-icon si-gem">💎</div>
+          GemFinder
+        </a>
       </li>
-      <li class="social-item">
-        <div class="social-icon si-yt">▶</div>
-        Weta Us
+      <li>
+        <a class="social-item" href="https://pancakeswap.finance/swap?outputCurrency=0x185643a3a9c36FA12DA777f6E86a25f509Fe512C" target="_blank">
+          <div class="social-icon si-tg">🥞</div>
+          PancakeSwap
+        </a>
       </li>
     </ul>
   </div>
