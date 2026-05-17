@@ -1,0 +1,812 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FALCOR TOKEN</title>
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;600;700&family=Exo+2:wght@300;400;600;800;900&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cyan: #00e5ff;
+    --cyan-dim: #00b8d4;
+    --green: #69ff47;
+    --pink: #ff2d78;
+    --purple: #c678f5;
+    --dark: #060a12;
+    --darker: #030608;
+    --card: rgba(8, 20, 38, 0.85);
+    --border: rgba(0,229,255,0.15);
+    --text: #c8e6f0;
+    --text-dim: #6a8fa0;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Exo 2', sans-serif;
+    background: var(--dark);
+    color: var(--text);
+    overflow-x: hidden;
+    cursor: default;
+  }
+
+  /* ── HERO BG ── */
+  .hero-bg {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    background:
+      radial-gradient(ellipse 80% 60% at 70% 40%, rgba(0,229,255,0.07) 0%, transparent 60%),
+      radial-gradient(ellipse 60% 80% at 20% 80%, rgba(198,120,245,0.07) 0%, transparent 60%),
+      linear-gradient(160deg, #060a12 0%, #081626 40%, #06101e 100%);
+    overflow: hidden;
+  }
+
+  .hero-bg::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(0,229,255,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0,229,255,0.03) 1px, transparent 1px);
+    background-size: 60px 60px;
+    animation: gridMove 20s linear infinite;
+  }
+
+  @keyframes gridMove {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(60px); }
+  }
+
+  /* Circuit lines */
+  .circuits {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    opacity: 0.18;
+  }
+  .circuits svg { width: 100%; height: 100%; }
+
+  /* ── NAV ── */
+  nav {
+    position: relative;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 28px 40px 0;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .logo-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .logo-ring {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    border: 2px solid rgba(0,229,255,0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: radial-gradient(circle, rgba(0,229,255,0.1) 0%, transparent 70%);
+    box-shadow: 0 0 30px rgba(0,229,255,0.3), inset 0 0 20px rgba(0,229,255,0.05);
+    animation: logoPulse 3s ease-in-out infinite;
+    position: relative;
+  }
+
+  @keyframes logoPulse {
+    0%, 100% { box-shadow: 0 0 30px rgba(0,229,255,0.3), inset 0 0 20px rgba(0,229,255,0.05); }
+    50% { box-shadow: 0 0 60px rgba(0,229,255,0.5), inset 0 0 30px rgba(0,229,255,0.1); }
+  }
+
+  .logo-dragon {
+    font-size: 36px;
+    filter: drop-shadow(0 0 10px var(--cyan));
+  }
+
+  .logo-text {
+    text-align: center;
+    line-height: 1;
+  }
+  .logo-text .main { font-size: 22px; font-weight: 900; letter-spacing: 6px; color: #fff; text-shadow: 0 0 20px rgba(0,229,255,0.5); }
+  .logo-text .sub { font-size: 10px; letter-spacing: 8px; color: var(--cyan-dim); }
+
+  .nav-links {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(4, 14, 28, 0.8);
+    border: 1px solid var(--border);
+    border-radius: 50px;
+    padding: 8px 12px;
+    backdrop-filter: blur(10px);
+  }
+
+  .nav-links a {
+    color: var(--text-dim);
+    text-decoration: none;
+    padding: 8px 18px;
+    border-radius: 30px;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    transition: all 0.3s;
+    text-transform: uppercase;
+  }
+  .nav-links a:hover { color: var(--cyan); background: rgba(0,229,255,0.08); }
+
+  .btn-buy {
+    background: linear-gradient(135deg, #00e5ff, #00b8d4);
+    color: #000 !important;
+    font-weight: 800 !important;
+    letter-spacing: 2px !important;
+    box-shadow: 0 0 20px rgba(0,229,255,0.4);
+    transition: all 0.3s !important;
+  }
+  .btn-buy:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 40px rgba(0,229,255,0.7) !important;
+    background: linear-gradient(135deg, #33eeff, #00e5ff) !important;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    position: relative;
+    z-index: 10;
+    text-align: center;
+    padding: 60px 20px 40px;
+  }
+
+  .hero h1 {
+    font-size: clamp(32px, 6vw, 72px);
+    font-weight: 900;
+    line-height: 1.1;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #fff;
+    text-shadow:
+      0 0 40px rgba(0,229,255,0.4),
+      0 0 80px rgba(0,229,255,0.15);
+    margin-bottom: 16px;
+    animation: fadeUp 0.8s ease both;
+  }
+
+  .hero h1 span { color: var(--cyan); }
+
+  .hero p {
+    font-size: 16px;
+    color: var(--text-dim);
+    letter-spacing: 1px;
+    margin-bottom: 32px;
+    animation: fadeUp 0.8s 0.2s ease both;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .btn-start {
+    display: inline-block;
+    padding: 14px 40px;
+    border: 2px solid rgba(255,255,255,0.3);
+    border-radius: 50px;
+    color: #fff;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    background: rgba(255,255,255,0.05);
+    backdrop-filter: blur(10px);
+    transition: all 0.3s;
+    animation: fadeUp 0.8s 0.4s ease both;
+  }
+  .btn-start:hover {
+    border-color: var(--cyan);
+    color: var(--cyan);
+    background: rgba(0,229,255,0.1);
+    box-shadow: 0 0 30px rgba(0,229,255,0.3);
+  }
+
+  /* ── MARKET CARD ── */
+  .market-section {
+    position: relative;
+    z-index: 10;
+    max-width: 780px;
+    margin: 20px auto;
+    padding: 0 20px;
+    animation: fadeUp 0.8s 0.6s ease both;
+  }
+
+  .market-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+    backdrop-filter: blur(20px);
+    box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+  }
+
+  .chart-area {
+    background: #080f1a;
+    padding: 16px;
+    border-bottom: 1px solid var(--border);
+    position: relative;
+    height: 160px;
+    overflow: hidden;
+  }
+
+  .chart-label {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 10px;
+    color: var(--text-dim);
+    position: absolute;
+    top: 10px;
+    left: 14px;
+  }
+
+  .chart-brand {
+    position: absolute;
+    top: 10px;
+    right: 14px;
+    font-size: 10px;
+    color: var(--cyan-dim);
+    font-family: 'Share Tech Mono', monospace;
+  }
+
+  /* Fake chart */
+  .fake-chart {
+    position: absolute;
+    bottom: 20px;
+    left: 10px;
+    right: 10px;
+    height: 100px;
+  }
+  .fake-chart svg { width: 100%; height: 100%; }
+
+  .market-data {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+  }
+
+  .market-info {
+    padding: 16px 20px;
+    border-right: 1px solid var(--border);
+  }
+
+  .market-info h3 {
+    font-size: 11px;
+    letter-spacing: 2px;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+
+  .price-main {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 16px;
+    color: #fff;
+    margin-bottom: 4px;
+  }
+
+  .market-stats {
+    padding: 16px 20px;
+  }
+
+  .stat-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px 0;
+    font-size: 12px;
+    border-bottom: 1px solid rgba(0,229,255,0.05);
+  }
+  .stat-row:last-child { border-bottom: none; }
+  .stat-label { color: var(--text-dim); }
+  .stat-value { font-family: 'Share Tech Mono', monospace; color: #fff; }
+  .stat-value.red { color: #ff4d6a; }
+  .stat-value.green { color: var(--green); }
+
+  /* ── BOTTOM GRID ── */
+  .bottom-grid {
+    position: relative;
+    z-index: 10;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 16px;
+    max-width: 1000px;
+    margin: 20px auto 60px;
+    padding: 0 20px;
+    animation: fadeUp 0.8s 0.8s ease both;
+  }
+
+  .panel {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px;
+    backdrop-filter: blur(20px);
+    box-shadow: 0 10px 40px rgba(0,0,0,0.4);
+    transition: border-color 0.3s, transform 0.3s;
+  }
+  .panel:hover {
+    border-color: rgba(0,229,255,0.35);
+    transform: translateY(-3px);
+  }
+
+  .panel h3 {
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #fff;
+    margin-bottom: 4px;
+  }
+  .panel .sub-label {
+    font-size: 10px;
+    color: var(--text-dim);
+    letter-spacing: 1px;
+    margin-bottom: 16px;
+  }
+
+  /* Tokenomics donut */
+  .donut-wrap {
+    display: flex;
+    gap: 14px;
+    align-items: center;
+  }
+
+  .donut-svg { flex-shrink: 0; }
+
+  .token-legend { flex: 1; }
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 11px;
+    color: var(--text-dim);
+    margin-bottom: 5px;
+  }
+  .legend-dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+  .legend-pct { margin-left: auto; color: var(--text); font-family: 'Share Tech Mono', monospace; font-size: 10px; }
+
+  /* Roadmap timeline */
+  .timeline {
+    position: relative;
+    padding-top: 10px;
+  }
+
+  .tl-line {
+    position: absolute;
+    top: 22px;
+    left: 8px;
+    right: 8px;
+    height: 2px;
+    background: linear-gradient(90deg, var(--cyan), var(--green));
+    border-radius: 2px;
+  }
+
+  .tl-nodes {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+  }
+
+  .tl-node {
+    width: 14px; height: 14px;
+    border-radius: 50%;
+    background: var(--dark);
+    border: 2px solid var(--cyan);
+    position: relative;
+    z-index: 1;
+    transition: all 0.3s;
+  }
+  .tl-node.active { background: var(--cyan); box-shadow: 0 0 12px var(--cyan); }
+  .tl-node.future { border-color: var(--green); }
+
+  .tl-labels {
+    display: flex;
+    justify-content: space-between;
+    gap: 4px;
+  }
+  .tl-item {
+    flex: 1;
+    text-align: center;
+  }
+  .tl-quarter {
+    font-size: 9px;
+    font-weight: 700;
+    color: var(--cyan);
+    letter-spacing: 1px;
+    margin-bottom: 3px;
+    font-family: 'Share Tech Mono', monospace;
+  }
+  .tl-item.future .tl-quarter { color: var(--green); }
+  .tl-desc {
+    font-size: 9px;
+    color: var(--text-dim);
+    line-height: 1.3;
+  }
+
+  /* Community */
+  .social-list { list-style: none; }
+  .social-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 9px 10px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text);
+    cursor: pointer;
+    transition: all 0.3s;
+    border: 1px solid transparent;
+    margin-bottom: 6px;
+  }
+  .social-item:hover {
+    background: rgba(0,229,255,0.08);
+    border-color: var(--border);
+    color: var(--cyan);
+  }
+  .social-icon {
+    width: 30px; height: 30px;
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 14px;
+    flex-shrink: 0;
+  }
+  .si-fb { background: #1877f2; }
+  .si-ig { background: linear-gradient(135deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); }
+  .si-disc { background: #5865f2; }
+  .si-yt { background: #ff0000; }
+
+  /* ── GLOW ORBS ── */
+  .orb {
+    position: fixed;
+    border-radius: 50%;
+    filter: blur(80px);
+    pointer-events: none;
+    z-index: 1;
+  }
+  .orb1 {
+    width: 400px; height: 400px;
+    background: radial-gradient(circle, rgba(0,229,255,0.08), transparent);
+    top: -100px; right: -100px;
+    animation: orbFloat 8s ease-in-out infinite;
+  }
+  .orb2 {
+    width: 300px; height: 300px;
+    background: radial-gradient(circle, rgba(198,120,245,0.07), transparent);
+    bottom: 100px; left: -80px;
+    animation: orbFloat 10s 2s ease-in-out infinite;
+  }
+
+  @keyframes orbFloat {
+    0%, 100% { transform: translateY(0) scale(1); }
+    50% { transform: translateY(-30px) scale(1.05); }
+  }
+
+  /* Ticker */
+  .ticker {
+    position: relative;
+    z-index: 10;
+    background: rgba(0,229,255,0.05);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    padding: 8px 0;
+    overflow: hidden;
+    margin-bottom: 10px;
+  }
+  .ticker-inner {
+    display: flex;
+    gap: 60px;
+    animation: ticker 20s linear infinite;
+    white-space: nowrap;
+    width: max-content;
+  }
+  @keyframes ticker { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+  .ticker-item {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 11px;
+    color: var(--text-dim);
+    display: flex;
+    gap: 8px;
+    align-items: center;
+  }
+  .ticker-item .sym { color: var(--cyan); font-weight: 700; }
+  .ticker-item .up { color: var(--green); }
+  .ticker-item .dn { color: #ff4d6a; }
+
+  @media (max-width: 700px) {
+    .bottom-grid { grid-template-columns: 1fr; }
+    .market-data { grid-template-columns: 1fr; }
+    .market-info { border-right: none; border-bottom: 1px solid var(--border); }
+  }
+</style>
+</head>
+<body>
+
+<!-- Background -->
+<div class="hero-bg">
+  <div class="circuits">
+    <svg viewBox="0 0 1400 900" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+      <!-- Circuit traces -->
+      <g stroke="#00e5ff" stroke-width="0.8" fill="none" opacity="0.6">
+        <polyline points="0,200 120,200 120,150 300,150 300,200 500,200"/>
+        <polyline points="500,200 500,280 700,280 700,200 900,200"/>
+        <polyline points="900,200 900,120 1100,120 1100,200 1400,200"/>
+        <polyline points="0,400 80,400 80,350 200,350 200,450 400,450"/>
+        <polyline points="400,450 400,380 600,380 600,450 800,450"/>
+        <polyline points="800,450 800,380 1000,380 1000,450 1400,450"/>
+        <polyline points="0,650 150,650 150,600 350,600 350,700 600,700"/>
+        <polyline points="600,700 600,620 850,620 850,700 1200,700 1200,650 1400,650"/>
+        <!-- Vertical traces -->
+        <polyline points="120,200 120,400"/>
+        <polyline points="300,150 300,50"/>
+        <polyline points="500,280 500,450"/>
+        <polyline points="700,280 700,100"/>
+        <polyline points="900,200 900,380"/>
+        <polyline points="1100,120 1100,300"/>
+        <polyline points="200,350 200,200"/>
+        <polyline points="600,380 600,200"/>
+        <polyline points="800,450 800,300"/>
+        <polyline points="350,600 350,450"/>
+        <polyline points="850,620 850,450"/>
+        <polyline points="1200,650 1200,500"/>
+      </g>
+      <!-- Circuit nodes -->
+      <g fill="#00e5ff" opacity="0.5">
+        <circle cx="120" cy="200" r="3"/>
+        <circle cx="300" cy="150" r="3"/>
+        <circle cx="500" cy="200" r="3"/>
+        <circle cx="700" cy="280" r="3"/>
+        <circle cx="900" cy="200" r="3"/>
+        <circle cx="1100" cy="120" r="3"/>
+        <circle cx="200" cy="350" r="3"/>
+        <circle cx="600" cy="380" r="3"/>
+        <circle cx="800" cy="450" r="3"/>
+        <circle cx="350" cy="600" r="3"/>
+        <circle cx="850" cy="620" r="3"/>
+        <circle cx="1200" cy="650" r="3"/>
+        <!-- Square pads -->
+        <rect x="297" y="147" width="6" height="6" rx="1"/>
+        <rect x="697" y="277" width="6" height="6" rx="1"/>
+        <rect x="1097" y="117" width="6" height="6" rx="1"/>
+        <rect x="597" y="377" width="6" height="6" rx="1"/>
+        <rect x="847" y="617" width="6" height="6" rx="1"/>
+      </g>
+      <!-- Microchips -->
+      <g stroke="#00e5ff" stroke-width="0.8" fill="rgba(0,229,255,0.04)" opacity="0.5">
+        <rect x="650" y="60" width="100" height="80" rx="4"/>
+        <text x="700" y="105" text-anchor="middle" fill="#00e5ff" font-size="8" font-family="monospace">FLC-01</text>
+        <rect x="1050" y="260" width="80" height="80" rx="4"/>
+        <text x="1090" y="305" text-anchor="middle" fill="#00e5ff" font-size="8" font-family="monospace">FLC-02</text>
+        <rect x="150" y="420" width="90" height="70" rx="4"/>
+        <text x="195" y="458" text-anchor="middle" fill="#00e5ff" font-size="8" font-family="monospace">FLC-03</text>
+      </g>
+    </svg>
+  </div>
+</div>
+
+<!-- Orbs -->
+<div class="orb orb1"></div>
+<div class="orb orb2"></div>
+
+<!-- Nav -->
+<nav>
+  <div class="logo-wrap">
+    <div class="logo-ring">
+      <span class="logo-dragon">🐉</span>
+    </div>
+    <div class="logo-text">
+      <div class="main">FALCOR</div>
+      <div class="sub">TOKEN</div>
+    </div>
+  </div>
+  <div class="nav-links">
+    <a href="#">About</a>
+    <a href="#">Tokenomics</a>
+    <a href="#">Roadmap</a>
+    <a href="#">Whitepaper</a>
+    <a href="#">Community</a>
+    <a href="#" class="btn-buy">BUY FLC</a>
+  </div>
+</nav>
+
+<!-- Ticker -->
+<div class="ticker">
+  <div class="ticker-inner">
+    <div class="ticker-item"><span class="sym">FLC</span> $0.0002842 <span class="dn">▼ 11.79%</span></div>
+    <div class="ticker-item"><span class="sym">BTC</span> $97,420.00 <span class="up">▲ 2.31%</span></div>
+    <div class="ticker-item"><span class="sym">ETH</span> $3,812.44 <span class="up">▲ 1.74%</span></div>
+    <div class="ticker-item"><span class="sym">SOL</span> $182.50 <span class="dn">▼ 0.82%</span></div>
+    <div class="ticker-item"><span class="sym">BNB</span> $624.80 <span class="up">▲ 0.55%</span></div>
+    <div class="ticker-item"><span class="sym">VOL 24h</span> $46 <span class="sym">MCap</span> $2,942</div>
+    <!-- repeat for seamless loop -->
+    <div class="ticker-item"><span class="sym">FLC</span> $0.0002842 <span class="dn">▼ 11.79%</span></div>
+    <div class="ticker-item"><span class="sym">BTC</span> $97,420.00 <span class="up">▲ 2.31%</span></div>
+    <div class="ticker-item"><span class="sym">ETH</span> $3,812.44 <span class="up">▲ 1.74%</span></div>
+    <div class="ticker-item"><span class="sym">SOL</span> $182.50 <span class="dn">▼ 0.82%</span></div>
+    <div class="ticker-item"><span class="sym">BNB</span> $624.80 <span class="up">▲ 0.55%</span></div>
+    <div class="ticker-item"><span class="sym">VOL 24h</span> $46 <span class="sym">MCap</span> $2,942</div>
+  </div>
+</div>
+
+<!-- Hero -->
+<div class="hero">
+  <h1>FALCOR TOKEN:<br><span>POWER THE FUTURE</span><br>OF BLOCKCHAIN</h1>
+  <p>A revolutionary token for an advanced digital ecosystem.</p>
+  <a href="#" class="btn-start">GET STARTED</a>
+</div>
+
+<!-- Market Card -->
+<div class="market-section">
+  <div class="market-card">
+    <div class="chart-area">
+      <div class="chart-label">FLC/USD · 15 minutes</div>
+      <div class="chart-brand">Data by COINBRAIN</div>
+      <div class="fake-chart">
+        <svg viewBox="0 0 700 100" preserveAspectRatio="none">
+          <defs>
+            <linearGradient id="chartGrad" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#00e5ff" stop-opacity="0.3"/>
+              <stop offset="100%" stop-color="#00e5ff" stop-opacity="0"/>
+            </linearGradient>
+          </defs>
+          <!-- Area fill -->
+          <path d="M0,60 L30,55 L60,50 L90,45 L120,52 L150,48 L180,42 L210,38 L240,44 L270,50 L300,46 L330,40 L360,36 L390,42 L420,38 L450,32 L480,28 L510,35 L540,30 L570,38 L600,45 L630,50 L660,55 L700,60 L700,100 L0,100 Z"
+                fill="url(#chartGrad)"/>
+          <!-- Line -->
+          <polyline points="0,60 30,55 60,50 90,45 120,52 150,48 180,42 210,38 240,44 270,50 300,46 330,40 360,36 390,42 420,38 450,32 480,28 510,35 540,30 570,38 600,45 630,50 660,55 700,60"
+                    stroke="#00e5ff" stroke-width="1.5" fill="none"/>
+          <!-- Candles hint (red zone) -->
+          <rect x="480" y="24" width="120" height="14" fill="rgba(255,45,120,0.2)" rx="2"/>
+          <!-- Current price line -->
+          <line x1="700" y1="60" x2="640" y2="60" stroke="#ff2d78" stroke-width="1" stroke-dasharray="3,2"/>
+        </svg>
+      </div>
+    </div>
+    <div class="market-data">
+      <div class="market-info">
+        <h3>Market Data</h3>
+        <div class="price-main">$ 0.0002842</div>
+      </div>
+      <div class="market-stats">
+        <div class="stat-row">
+          <span class="stat-label">Price Change (24h)</span>
+          <span class="stat-value red">▼ 11.79%</span>
+        </div>
+        <div class="stat-row">
+          <span class="stat-label">Volume (24h)</span>
+          <span class="stat-value">$ 46</span>
+        </div>
+        <div class="stat-row">
+          <span class="stat-label">Market Cap</span>
+          <span class="stat-value">$ 2,942</span>
+        </div>
+        <div class="stat-row">
+          <span class="stat-label">Total Liquidity</span>
+          <span class="stat-value">$ 27</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Bottom 3 Panels -->
+<div class="bottom-grid">
+
+  <!-- Tokenomics -->
+  <div class="panel">
+    <h3>Tokenomics</h3>
+    <div class="sub-label">Breakdown & Distribution</div>
+    <div class="donut-wrap">
+      <svg class="donut-svg" width="90" height="90" viewBox="0 0 90 90">
+        <circle cx="45" cy="45" r="35" fill="none" stroke="#0a1e35" stroke-width="16"/>
+        <!-- segments approximated -->
+        <circle cx="45" cy="45" r="35" fill="none" stroke="#00e5ff" stroke-width="16"
+          stroke-dasharray="66 154" stroke-dashoffset="0" transform="rotate(-90 45 45)"/>
+        <circle cx="45" cy="45" r="35" fill="none" stroke="#69ff47" stroke-width="16"
+          stroke-dasharray="44 176" stroke-dashoffset="-66" transform="rotate(-90 45 45)"/>
+        <circle cx="45" cy="45" r="35" fill="none" stroke="#ff2d78" stroke-width="16"
+          stroke-dasharray="26 194" stroke-dashoffset="-110" transform="rotate(-90 45 45)"/>
+        <circle cx="45" cy="45" r="35" fill="none" stroke="#c678f5" stroke-width="16"
+          stroke-dasharray="26 194" stroke-dashoffset="-136" transform="rotate(-90 45 45)"/>
+        <circle cx="45" cy="45" r="35" fill="none" stroke="#ffb347" stroke-width="16"
+          stroke-dasharray="18 202" stroke-dashoffset="-162" transform="rotate(-90 45 45)"/>
+        <circle cx="45" cy="45" r="35" fill="none" stroke="#5ce1e6" stroke-width="16"
+          stroke-dasharray="36 184" stroke-dashoffset="-180" transform="rotate(-90 45 45)"/>
+        <circle cx="45" cy="45" r="35" fill="none" stroke="#4a4a6a" stroke-width="16"
+          stroke-dasharray="4 216" stroke-dashoffset="-216" transform="rotate(-90 45 45)"/>
+        <circle cx="45" cy="45" r="22" fill="#080f1a"/>
+      </svg>
+      <div class="token-legend">
+        <div class="legend-item"><div class="legend-dot" style="background:#00e5ff"></div> Capitals <span class="legend-pct">30%</span></div>
+        <div class="legend-item"><div class="legend-dot" style="background:#69ff47"></div> Recreation <span class="legend-pct">20%</span></div>
+        <div class="legend-item"><div class="legend-dot" style="background:#ff2d78"></div> Staking <span class="legend-pct">15%</span></div>
+        <div class="legend-item"><div class="legend-dot" style="background:#c678f5"></div> Foundation <span class="legend-pct">15%</span></div>
+        <div class="legend-item"><div class="legend-dot" style="background:#ffb347"></div> Liquidity <span class="legend-pct">10%</span></div>
+        <div class="legend-item"><div class="legend-dot" style="background:#5ce1e6"></div> Ecosystem <span class="legend-pct">20%</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Roadmap -->
+  <div class="panel">
+    <h3>Roadmap</h3>
+    <div class="sub-label">&nbsp;</div>
+    <div class="timeline">
+      <div class="tl-line"></div>
+      <div class="tl-nodes">
+        <div class="tl-node active"></div>
+        <div class="tl-node active"></div>
+        <div class="tl-node active"></div>
+        <div class="tl-node active"></div>
+        <div class="tl-node future"></div>
+      </div>
+      <div class="tl-labels">
+        <div class="tl-item">
+          <div class="tl-quarter">Q1 2026</div>
+          <div class="tl-desc">Concept & Token Creation</div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-quarter">Q2 2026</div>
+          <div class="tl-desc">Decentralized Digital Marketplace</div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-quarter">Q4 2026</div>
+          <div class="tl-desc">Smart Contract Module Funding</div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-quarter">Q3 2028</div>
+          <div class="tl-desc">Blockchain Partnerships</div>
+        </div>
+        <div class="tl-item future">
+          <div class="tl-quarter">2027+</div>
+          <div class="tl-desc">Ecosystem & Governance Launch</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Community -->
+  <div class="panel">
+    <h3>Community</h3>
+    <div class="sub-label">&nbsp;</div>
+    <ul class="social-list">
+      <li class="social-item">
+        <div class="social-icon si-fb">📘</div>
+        Facebook
+      </li>
+      <li class="social-item">
+        <div class="social-icon si-ig">📷</div>
+        Falcor
+      </li>
+      <li class="social-item">
+        <div class="social-icon si-disc">💬</div>
+        Community
+      </li>
+      <li class="social-item">
+        <div class="social-icon si-yt">▶</div>
+        Weta Us
+      </li>
+    </ul>
+  </div>
+
+</div>
+
+</body>
+</html>
