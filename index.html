@@ -343,10 +343,13 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    font-family: 'Orbitron', monospace;
-    font-size: 2rem;
-    font-weight: 900;
-    color: var(--gold);
+  }
+
+  .falcon-core img {
+    width: 80px;
+    height: 80px;
+    object-fit: contain;
+    border-radius: 50%;
   }
 
   .about-content h2 {
@@ -550,7 +553,9 @@
 <body>
 
 <nav>
-  <a class="nav-logo" href="#" style="display:flex;align-items:center;gap:10px;">🦅 FALCOR</a>
+  <a class="nav-logo" href="#" style="display:flex;align-items:center;gap:10px;">
+    <img src="logo.png" alt="FALCOR" style="height:38px;width:38px;object-fit:contain;border-radius:50%;"> FALCOR
+  </a>
   <ul class="nav-links">
     <li><a href="#about">About</a></li>
     <li><a href="#tokenomics">Tokenomics</a></li>
@@ -561,7 +566,7 @@
 
 <!-- HERO -->
 <section class="hero">
-  <div class="hero-badge">🦅 BSC · BEP-20 · PancakeSwap</div>
+  <div class="hero-badge">🐉 BSC · BEP-20 · PancakeSwap</div>
   <h1 class="hero-title">
     <span>FALCOR</span>
     <div class="flc">$FLC</div>
@@ -571,7 +576,9 @@
     FALCOR is a community-driven token on Binance Smart Chain — built for those who dare to soar above the crowd. No limits, no ceilings. Just pure momentum.
   </p>
   <div class="hero-cta">
-    <a href="https://pancakeswap.finance/swap?outputCurrency=0xee9C046D3e1AcC746C787F037D24D79D7315a5f9" target="_blank" class="btn btn-primary">🦅 Buy FLC Now</a>
+    <a href="https://pancakeswap.finance/swap?outputCurrency=0xee9C046D3e1AcC746C787F037D24D79D7315a5f9" target="_blank" class="btn btn-primary">
+      <img src="logo.png" alt="" style="height:20px;width:20px;object-fit:contain;border-radius:50%;"> Buy FLC Now
+    </a>
     <a href="https://dexscreener.com/bsc/0xee9C046D3e1AcC746C787F037D24D79D7315a5f9" target="_blank" class="btn btn-outline">📊 Live Chart</a>
   </div>
 </section>
@@ -622,7 +629,9 @@
       <div class="falcon-icon">
         <div class="falcon-ring"></div>
         <div class="falcon-ring falcon-ring-2"></div>
-        <div class="falcon-core">🦅</div>
+        <div class="falcon-core">
+          <img src="logo.png" alt="FALCOR Dragon Logo">
+        </div>
       </div>
     </div>
     <div class="about-content">
@@ -655,7 +664,7 @@
       <p>Built on Binance Smart Chain for lightning-fast transactions and ultra-low gas fees. Trade anytime, anywhere.</p>
     </div>
     <div class="feature-card">
-      <div class="feature-icon">🦅</div>
+      <div class="feature-icon"><img src="logo.png" alt="" style="height:32px;width:32px;object-fit:contain;border-radius:50%;"></div>
       <h3>Community First</h3>
       <p>FALCOR is powered by its holders. A real community building real momentum — together we fly higher.</p>
     </div>
