@@ -13,4 +13,183 @@
     --bg2: #0d1420;
     --bg3: #111927;
     --text: #e8edf5;
-    --muted:
+    --muted: #7a8a9e;
+    --accent: #1db88e;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Rajdhani', sans-serif;
+    overflow-x: hidden;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url('bg.jpg');
+    background-size: cover;
+    background-position: center top;
+    background-repeat: no-repeat;
+    opacity: 0.35;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 2rem;
+    background: rgba(8,12,18,0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(240,180,41,0.15);
+  }
+
+  .nav-logo {
+    font-family: 'Orbitron', monospace;
+    font-size: 1.4rem;
+    font-weight: 900;
+    color: var(--gold);
+    letter-spacing: 3px;
+    text-decoration: none;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 1.5rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 0.9rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--gold); }
+
+  .hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 6rem 2rem 4rem;
+    z-index: 1;
+  }
+
+  .hero-badge {
+    display: inline-block;
+    background: rgba(240,180,41,0.1);
+    border: 1px solid rgba(240,180,41,0.3);
+    color: var(--gold);
+    font-size: 0.75rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    padding: 6px 20px;
+    border-radius: 100px;
+    margin-bottom: 2rem;
+    animation: fadeUp 0.6s ease both;
+  }
+
+  .hero-title {
+    font-family: 'Orbitron', monospace;
+    font-size: clamp(3.5rem, 10vw, 8rem);
+    font-weight: 900;
+    line-height: 0.9;
+    letter-spacing: -2px;
+    animation: fadeUp 0.6s 0.1s ease both;
+  }
+
+  .hero-title span {
+    display: block;
+    background: linear-gradient(135deg, #f0b429 0%, #ffe08a 50%, #b07d10 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .hero-title .flc {
+    font-size: clamp(1.5rem, 4vw, 3rem);
+    letter-spacing: 8px;
+    -webkit-text-fill-color: var(--muted);
+    background: none;
+    margin-top: 0.5rem;
+  }
+
+  .hero-desc {
+    max-width: 600px;
+    margin: 2rem auto;
+    font-size: 1.15rem;
+    color: var(--muted);
+    line-height: 1.7;
+    font-weight: 300;
+    animation: fadeUp 0.6s 0.2s ease both;
+  }
+
+  .hero-desc strong { color: var(--text); font-weight: 600; }
+
+  .hero-cta {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 2.5rem;
+    animation: fadeUp 0.6s 0.3s ease both;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 14px 32px;
+    border-radius: 6px;
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 1rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: all 0.2s;
+    cursor: pointer;
+    border: none;
+  }
+
+  .btn-primary { background: var(--gold); color: #080c12; }
+  .btn-primary:hover { background: #ffe08a; transform: translateY(-2px); }
+
+  .btn-outline {
+    background: transparent;
+    color: var(--gold);
+    border: 1px solid rgba(240,180,41,0.4);
+  }
+  .btn-outline:hover { border-color: var(--gold); background: rgba(240,180,41,0.08); transform: translateY(-2px); }
+
+  .stats {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 1px;
+    background: rgba(240,180,41,0.1);
+    border-top: 1px solid rgba(240,180,41,0.1);
+    border-bottom: 1px solid rgba(240,180,41,0.1);
+  }
+
+  .stat { background: var(--bg); padding: 2rem 1.5rem; text-align: center; }
+  .stat-value { font-family: 'Orbitron', monospace; font-size: 1.8rem; font-weight: 700; color: var(--gold); display: block; }
+  .stat-label { font-size: 0.8rem; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); margin-top: 4px; display: block; }
+
+  .counter-section { position: relative; z-index: 1; padding: 5rem 2rem; t
